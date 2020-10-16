@@ -2,22 +2,24 @@ import React from 'react';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import Reducer from './reducers'
-import './index.css';
-import App from './components/App';
-import * as serviceWorker from './serviceWorker';
 
-const store = createStore(Reducer)
+import reducer from './reducers'
+import * as serviceWorker from './serviceWorker'
+import App from './App'
 
-//  </React.StrictMode>
+const store = createStore(
+  reducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
+
 render(
-  
+  <React.StrictMode>
     <Provider store={store}>
       <App />
-    </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
-);
-
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
