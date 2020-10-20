@@ -1,14 +1,14 @@
-import React from 'react'
-import './App.css'
+import React, { useState } from 'react';
 
 const Footer = () => {
-    return (
-        <footer className="App-footer">
-            <p>
-                created by CignoBianco
-            </p>
-        </footer>
-    )
-}
+
+  return (
+      <div className="section">
+        <div className="container">
+         /Footer
+        </div>
+      </div>
+  );
+};
 
 export default Footer

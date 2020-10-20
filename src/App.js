@@ -1,34 +1,35 @@
-import React, {useEffect} from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getStoredState } from './actions/index'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadSavedState } from './actions';
 
-import Header from './components/core/Header'
+import Header from './components/Header';
 import Footer from './components/core/Footer'
-import AllLists from './components/AllLists' // TODO: rename
+import AllLists from './components/AllLists';
 
 import './App.css'
 
 const App = () => {
-
-  const dispatch = useDispatch()
-  const lists = useSelector(state => state.lists)
-
-  useEffect(() => {
-    const storedState = JSON.parse(localStorage.getItem('storedState'))
-    if (storedState) dispatch(getStoredState(storedState))
-  })
+  const dispatch = useDispatch();
+  const lists = useSelector(state => state.lists);
 
   useEffect(() => {
-    localStorage.setItem('storedState', JSON.stringify(lists))
-  })
+    const savedState = JSON.parse(localStorage.getItem('storedState'));
+    if (savedState) {
+      dispatch(loadSavedState(savedState));
+    }
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem('storedState', JSON.stringify(lists));
+  });
 
   return (
     <div className="App">
       <Header />
-        <AllLists />
-      <Footer />
+      <AllLists />
+      <Footer/>
     </div>
   );
-}
-
-export default App
+};
+ 
+export default App;

@@ -1,42 +1,110 @@
-let nextTodoId = 0
-let nextListId = 0
+import {
+  LOAD_SAVED_STATE,
+  TOGGLE_COMPLETED,
+  ADD_TODO,
+  DELETE_TODO,
+  SHOW_ACTIVE,
+  SHOW_COMPLETED,
+  SHOW_ALL,
+  UPDATE_LIST_TITLE,
+  DELETE_LIST,
+  ADD_LIST,
+  UPDATE_LIST_TODO,
+  DELETE_ALL_LISTS,
+  UPDATE_LIST_IMPORTANCE,
+  SHOW_IMPORTANT
+} from '../actions/types';
 
-export const getStoredState = storedState => ({
-    type: 'GET_STORED_STATE',
-    data: storedState
-})
+let listId = 0;
+let todoId = 0;
 
-export const addList = text => ({
-    type: 'ADD_LIST',
-    id: nextListId++,
-    text
-})
+export const loadSavedState = savedState => ({
+  type: LOAD_SAVED_STATE,
+  payload: savedState
+});
 
-export const addTodo = (text, listId = 0) => ({
-    type: 'ADD_TODO',
-    id: nextTodoId++,
-    listId: listId,
-    text
-})
+export const toggleCompleted = (listId, todoId) => ({
+  type: TOGGLE_COMPLETED,
+  payload: {
+    listId,
+    todoId
+  }
+});
+
+export const addTodo = (newTodo, listId) => ({
+  type: ADD_TODO,
+  payload: {
+    newTodoId: listId+''+todoId++,
+    newTodo,
+    listId,
+    important: 0
+  }
+});
+
+export const deleteTodo = (listId, todoId) => ({
+  type: DELETE_TODO,
+  payload: {
+    listId,
+    todoId
+  }
+});
+
+export const showActive = listId => ({
+  type: SHOW_ACTIVE,
+  payload: listId
+});
+
+export const showImportant = listId => ({
+  type: SHOW_IMPORTANT,
+  payload: listId
+});
+
+export const showCompleted = listId => ({
+  type: SHOW_COMPLETED,
+  payload: listId
+});
 
 export const showAll = listId => ({
-    type: 'SHOW_ALL',
-    listId: listId
-})
+  type: SHOW_ALL,
+  payload: listId
+});
 
-export const setVisibilityFilter = filter => ({
-    type: 'SET_VISIBILITY_FILTER',
-    filter
-})
+export const updateListTitle = (listId, newTitle) => ({
+  type: UPDATE_LIST_TITLE,
+  payload: {
+    listId,
+    newTitle
+  }
+});
 
-export const toggleTodo = (id, listId) => ({
-    type: 'TOGGLE_TODO',
-    listId: listId,
-    id
-})
+export const deleteList = listId => ({
+  type: DELETE_LIST,
+  payload: listId
+});
 
-export const visibilityFilters = {
-    SHOW_ALL: 'SHOW_ALL',
-    SHOW_COMPLETED: 'SHOW_COMPLETED',
-    SHOW_ACTIVE: 'SHOW_ACTIVE'
-}
+export const addList = () => ({
+  type: ADD_LIST,
+  payload: listId++
+});
+
+export const updateListTodo = (listId, todoId, newTodo) => ({
+  type: UPDATE_LIST_TODO,
+  payload: {
+    listId,
+    todoId,
+    newTodo
+  }
+});
+
+export const updateListImportance = (listId, todoId, important) => ({
+  type: UPDATE_LIST_IMPORTANCE,
+  payload: {
+    listId,
+    todoId,
+    important
+  }
+});
+
+export const deleteAllLists = () => ({
+  type: DELETE_ALL_LISTS
+});

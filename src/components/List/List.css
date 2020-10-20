@@ -1,0 +1,128 @@
+
+  .panel {
+    background-color: white;
+  }
+  .panel-tabs button {
+    border-width: 0;
+    border-bottom: 1px solid #dbdbdb;
+    margin-bottom: -1px;
+    padding: 0.5em;
+    cursor: pointer;
+    outline: none;
+    color: #888;
+    background-color: transparent;
+  }
+
+  .panel-tabs button:active {
+    border-bottom-color: dodgerblue;
+      color: dodgerblue;
+  } 
+
+
+  .list-msg {
+    font-size: 1rem;
+    text-align: center;
+    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
+    padding: 3rem 0;
+    color: #888;
+  }
+
+  .progressbar-wrapper {
+    background-color: #eee;
+    border-left: 1px solid #dbdbdb;
+    border-right: 1px solid #dbdbdb;
+  }
+
+  .progressbar-wrapper .progressbar {
+    background-color: lime;
+    height: 3px;
+    transition: width 0.7s ease-in-out, background-color 0.7s ease-in-out;
+  }
+
+  .panel-heading {
+    display: flex;
+    align-items: center;
+  }
+
+  .panel-heading .handle-list {
+    cursor: move;
+    color: #ccc;
+    padding-right: 0.6rem;
+    margin-left: -0.2rem;
+    position: relative;
+  }
+
+  .panel-heading .handle-list::after {
+    content: '';
+    position: absolute;
+    width: 125%;
+    height: 160%;
+    top: -27%;
+    left: -40%;
+  }
+
+  .panel-heading .action-btns {
+    float: right;
+    opacity: 0.5;
+    transition: opacity 0.4s ease-in-out;
+  }
+
+  .panel-heading .action-btns:hover {
+    opacity: 1;
+  }
+
+  .panel-heading .action-btns .delete-list-btn {
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 1.2rem;
+    color: #bbb;
+    cursor: pointer;
+    transition: color 0.4s ease;
+  }
+
+  .panel-heading .action-btns .delete-list-btn:hover {
+    color: tomato;
+  }
+
+  span.list-title {
+    outline: none;
+    display: block;
+    flex: 1;
+    cursor: pointer;
+    margin-right: 0.5rem;
+  }
+
+.list-drag {
+  cursor: move;
+}
+
+.list-drag .panel {
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.3);
+  border-radius: 5px 5px 0 0;
+  opacity: 1 !important;
+}
+
+.list-drag .panel .handle-list {
+  color: #444;
+}
+
+.list-ghost {
+  cursor: move;
+}
+
+.list-ghost .panel {
+  /* box-shadow: 0 0 0px 3px rgba(90, 169, 214, 0.3); */
+  border-radius: 5px 5px 0 0;
+  background: rgba(90, 169, 214, 0.2);
+}
+
+.list-ghost .panel > * {
+  visibility: hidden;
+}
+
+.list-chosen {
+  cursor: move;
+  /* opacity: 1 !important; */
+}

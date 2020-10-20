@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import listsReducer from './listsReducer';
 
-import lists from './lists'
-import visibilityFilter from './visibilityFilter'
+const rootReducer = combineReducers({
+  lists: listsReducer
+});
 
-export default combineReducers({
-    visibilityFilter,
-    lists
-})
+export default rootReducer;
