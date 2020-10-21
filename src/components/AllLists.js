@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import List from './List/List';
+import Container from 'react-bootstrap/Container';
 
 const AllLists = () => {
   const dispatch = useDispatch();
@@ -17,17 +18,17 @@ const AllLists = () => {
 
   return (
     <>
-      <section className="section" style={{ paddingTop: '.5rem' }}>
-        <div className="container">
-          <div className="columns is-multiline">
-            {lists.map(list => {
-              return (
-                <List key={list.id} list={list} visibility={list.visibility} />
-              );
-            })}
-         </div>
-        </div>
-      </section>
+    <Container>
+      <Row md={4}>
+        {lists.map(list => {
+          return (
+            <Col>
+              <List key={list.id} list={list} visibility={list.visibility} />
+            </Col>);
+        })}
+        
+      </Row>
+    </Container>
       {lists.length === 0 ? renderEmptyTodoMessage : null}
     </>
   );
