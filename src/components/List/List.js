@@ -128,7 +128,6 @@ const List = props => {
 
       <div>
           <h3>Delete list</h3>
-          <p>Are you sure?</p>
           <button onClick={()=>dispatch(deleteList(id))}>Delete</button>
       </div>
     </div>
