@@ -23,13 +23,10 @@ const AddTodo = props => {
         <input
           type="text"
           className="input is-small"
-          placeholder="Add Todo..."
+          placeholder="Add Todo"
           onChange={e => setNewTodo(e.target.value)}
           value={newTodo}
         />
-        <span className="icon is-small is-left">
-          <i className="fas fa-plus" aria-hidden="true" />
-        </span>
       </form>
     </div>
   );

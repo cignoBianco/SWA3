@@ -45,7 +45,7 @@ const List = props => {
         There are no {visibility} todos in your list.
         <br />
         {visibility === 'active'
-          ? `Woohoo, you’ve completed all your tasks! 🥳`
+          ? `completed!`
           : null}
       </p>
     );
