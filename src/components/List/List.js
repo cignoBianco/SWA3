@@ -127,8 +127,8 @@ const List = props => {
       </div>
 
       <div>
-          <h3>Delete list</h3>
-          <button onClick={()=>dispatch(deleteList(id))}>Delete</button>
+          <h3>Delete list </h3>
+          <button onClick={()=>dispatch(deleteList(id))}>Delete!</button>
       </div>
     </div>
   );
