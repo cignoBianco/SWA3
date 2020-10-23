@@ -4,19 +4,11 @@ import List from './List/List';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import EmptyTodoMessage from './EmptyTodoMessage'
 
 const AllLists = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
-
-  const renderEmptyTodoMessage = (
-    <div className="section">
-      <div className="container has-text-centered">
-        You currently have no lists. Today is a great day to start a new todo
-        list!
-      </div>
-    </div>
-  );
 
   return (
     <>
@@ -31,7 +23,7 @@ const AllLists = () => {
         
       </Row>
     </Container>
-      {lists.length === 0 ? renderEmptyTodoMessage : null}
+      {lists.length === 0 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['create', '/lists']} /> : null}
     </>
   );
 };

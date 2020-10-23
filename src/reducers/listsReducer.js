@@ -12,7 +12,8 @@ import {
   ADD_LIST,
   UPDATE_LIST_TODO,
   DELETE_ALL_LISTS,
-  UPDATE_LIST_IMPORTANCE
+  UPDATE_LIST_IMPORTANCE,
+  SET_DUE_DATE
 } from '../actions/types';
 
 const listsReducer = (state = [], action) => {
@@ -133,7 +134,7 @@ const listsReducer = (state = [], action) => {
       return [
         {
           id: action.payload,
-          title: 'Click me to edit title',
+          title: 'New Feat',
           visibility: 'all',
           todos: []
         },
@@ -142,6 +143,21 @@ const listsReducer = (state = [], action) => {
 
     case DELETE_ALL_LISTS:
       return [];
+
+      case SET_DUE_DATE: {
+        const { listId, todoId, dueDate } = action.payload;
+        return [...state].map(list => {
+          if (list.id === listId) {
+            list.todos.map(todo => {
+              if (todo.id === todoId) {
+                todo.dueDate = dueDate;
+              }
+              return todo;
+            });
+          }
+          return list;
+        });
+      }
 
     default:
       return state;

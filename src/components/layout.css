@@ -1,0 +1,19 @@
+:root {
+    --dark-red: #950101ff;
+    --international-orange-engineering: #b60201ff;
+    --safety-orange-blaze-orange: #fe680aff;
+    --sunglow: #fcc722ff;
+    --star-command-blue: #027bc4ff;
+    --oxford-blue: #001446ff;
+    --oxford-blue-2: #000c29ff;
+}
+
+.logo {
+    height: 32px;
+    /*background: #027BC455;*/
+    margin: 16px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

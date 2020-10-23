@@ -12,7 +12,8 @@ import {
   UPDATE_LIST_TODO,
   DELETE_ALL_LISTS,
   UPDATE_LIST_IMPORTANCE,
-  SHOW_IMPORTANT
+  SHOW_IMPORTANT,
+  SET_DUE_DATE
 } from '../actions/types';
 
 let listId = 0;
@@ -107,4 +108,13 @@ export const updateListImportance = (listId, todoId, important) => ({
 
 export const deleteAllLists = () => ({
   type: DELETE_ALL_LISTS
+});
+ 
+export const setDueDate = (listId, todoId, dueDate) => ({
+  type: SET_DUE_DATE,
+  payload: {
+    listId,
+    todoId,
+    dueDate
+  }
 });

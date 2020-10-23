@@ -4,15 +4,24 @@ import {
   toggleCompleted,
   updateListTodo,
   deleteTodo,
-  updateListImportance
+  updateListImportance,
+  setDueDate,
 } from '../../actions';
 import './Todo.css'
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import DueDateButton from './DueDateButton';
 
 const ListTodo = props => {
   const dispatch = useDispatch();
+  const datepicker = useRef();
 
   const onToggleCompleted = (listId, todoId) => {
     dispatch(toggleCompleted(listId, todoId));
+  };
+
+  const onDueDateSelect = (listId, todoId, dueDate) => {
+    dispatch(setDueDate(listId, todoId, dueDate));
   };
 
   const [isImporant, setImportance] = useState(0);
@@ -29,6 +38,68 @@ const ListTodo = props => {
 
   const { listId, todo, isImportant } = props;
 
+  const months = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec'
+  ];
+  const datified = new Date(todo.dueDate);
+  const today = new Date();
+  const dueDate = (() => {
+    if (todo.dueDate) {
+      return `${
+        months[datified.getMonth()]
+      } ${datified.getDate()}, ${datified.getFullYear()}`;
+    }
+    return null;
+  })();
+
+  const renderDueDate = (() => {
+    if (
+      dueDate &&
+      datified.getFullYear() === today.getFullYear() &&
+      datified.getMonth() === today.getMonth() &&
+      datified.getDate() === today.getDate()
+    ) {
+      return (
+        <div className="duedate">
+          <strong style={{ color: 'dodgerblue' }}>Due today! </strong>
+        </div>
+      );
+    } else if (
+      dueDate &&
+      datified.getFullYear() === today.getFullYear() &&
+      datified.getMonth() === today.getMonth() &&
+      datified.getDate() === today.getDate() + 1
+    ) {
+      return (
+        <div className="duedate">
+          <strong style={{ color: 'dodgerblue' }}>Due tomorrow! </strong>
+        </div>
+      );
+    } else if (dueDate && datified >= today) {
+      return (
+        <div className="duedate">
+          <strong>Due on: </strong> {dueDate}
+        </div>
+      );
+    } else {
+      return (
+        <div className="duedate" style={{ color: 'tomato' }}>
+          <strong style={{ color: 'red' }}>Was due on: </strong> {dueDate}
+        </div>
+      );
+    }
+  })();
   
   return (
     <div
@@ -71,14 +142,34 @@ const ListTodo = props => {
       <div className="action-btns" tabIndex="0">
         <i className="fas fa-ellipsis-v" />
         <ul>
+        <DatePicker
+            customInput={<DueDateButton />}
+            onChange={dueDate => onDueDateSelect(listId, todo.id, dueDate)}
+            withPortal
+            popperModifiers={{
+              offset: {
+                enabled: true,
+                offset: '20px, 0px'
+              }
+            }}
+            shouldCloseOnSelect={true}
+            ref={datepicker}
+            minDate={new Date()}
+          >
             <div style={{ clear: 'both', padding: 5 }}>
               <button
                 className="button is-info clear-btn"
-                onClick={() => dispatch(deleteTodo(listId, todo.id))}
+                onClick={() => {
+                  onDueDateSelect(listId, todo.id, null);
+                  datepicker.current.setOpen(false);
+                }}
               >
                 Clear
               </button>
             </div>
+          </DatePicker>
+        
+            
           <li
             className="delete-btn"
             title="Delete Todo"
@@ -88,7 +179,7 @@ const ListTodo = props => {
           </li>
         </ul>
       </div>
-
+      {todo.dueDate ? renderDueDate : null}
     </div>
   );
 };

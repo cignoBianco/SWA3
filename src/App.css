@@ -1,3 +1,9 @@
 .App {
   text-align: center;
 }
+
+.grid-center {
+  height: 100%;
+  display: grid;
+  align-content: center;
+}
