@@ -11,6 +11,9 @@ import './Todo.css'
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import DueDateButton from './DueDateButton';
+import { 
+  CloseCircleOutlined, CalendarOutlined
+ } from '@ant-design/icons';
 
 const ListTodo = props => {
   const dispatch = useDispatch();
@@ -89,6 +92,7 @@ const ListTodo = props => {
     } else if (dueDate && datified >= today) {
       return (
         <div className="duedate">
+          <CalendarOutlined />
           <strong>Due on: </strong> {dueDate}
         </div>
       );
@@ -172,10 +176,8 @@ const ListTodo = props => {
             
           <li
             className="delete-btn"
-            title="Delete Todo"
-            
           >
-            <i onClick={() => dispatch(deleteTodo(listId, todo.id))} className="fas fa-trash" /> &nbsp; Delete Todo
+            <CloseCircleOutlined onClick={() => dispatch(deleteTodo(listId, todo.id))} />
           </li>
         </ul>
       </div>

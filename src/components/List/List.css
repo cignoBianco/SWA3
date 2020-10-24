@@ -126,3 +126,23 @@
   cursor: move;
   /* opacity: 1 !important; */
 }
+
+body .ant-card-body {
+  padding: 0 0 3em 0;
+}
+
+body .ant-card-head {
+  max-height: 38px;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+body div+ .panel-block{
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+}

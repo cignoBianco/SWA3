@@ -19,8 +19,6 @@ const Header = () => {
         <div>
           <div>
                 <h1>Todo App</h1>
-                <p>еще нужна сортировка коллекций</p>
-              
               <div>
                 <button onClick={() => dispatch(addList())} >
                   <span>Add New List</span>
@@ -29,7 +27,7 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {renderDeleteAllModal}
+      {lists.length > 0 ? renderDeleteAllModal : ''}
     </>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-
+import {  Card } from 'antd';
+import './../layout.css'
 import {
   updateListTitle,
   deleteList,
@@ -9,10 +10,13 @@ import {
   showCompleted,
   showAll
 } from '../../actions';
-
+import { 
+  CloseCircleOutlined
+ } from '@ant-design/icons';
 import ListTodo from './ListTodo';
 import AddTodo from './AddTodo';
 import './List.css';
+import EmptyTodoMessage from './../EmptyTodoMessage'
 
 const List = props => {
   const dispatch = useDispatch();
@@ -25,7 +29,7 @@ const List = props => {
   let message, filteredList, totalCompleted, progressPerc;
 
   if (todos.length === 0) {
-    message = <p className="list-msg">There are no todos in your list.</p>;
+    message = <EmptyTodoMessage message={'No todos'} link={['todoc', '/concepts/todos']} button={['create', '#']} />
   }
 
   filteredList = todos.filter(todo => {
@@ -42,7 +46,7 @@ const List = props => {
   if (filteredList.length === 0 && todos.length !== 0) {
     message = (
       <p className="list-msg">
-        There are no {visibility} todos in your list.
+        <EmptyTodoMessage message={visibility,' todos'} link={[visibility+' todos', '/concepts/todos']} button={['create', '#'+id]} />
         <br />
         {visibility === 'active'
           ? `completed!`
@@ -55,27 +59,32 @@ const List = props => {
   progressPerc = (totalCompleted / todos.length) * 100;
 
   return (
-    <div className="column is-one-third List" data-id={id}>
+    <div data-id={id} id={id}>
+
+  <Card
+    style={{ width: '100%', height: 380 }}
+    title={(<span
+      className="list-title"
+      contentEditable={true}
+      onBlur={e => updateTitle(id, e)}
+      onKeyPress={e => {
+        if (e.key === 'Enter') {
+          updateTitle(id, e);
+          e.target.blur();
+        }
+      }}
+      suppressContentEditableWarning={true}
+      spellCheck={false}
+    >
+      {title}
+    </span>)}
+    
+    extra={<CloseCircleOutlined onClick={()=>dispatch(deleteList(id))} /> }
+  >
+  
       <div className="panel">
         <p className="panel-heading">
-          <span className="handle-list">
-            <i className="fas fa-grip-vertical" />
-          </span>
-          <span
-            className="list-title"
-            contentEditable={true}
-            onBlur={e => updateTitle(id, e)}
-            onKeyPress={e => {
-              if (e.key === 'Enter') {
-                updateTitle(id, e);
-                e.target.blur();
-              }
-            }}
-            suppressContentEditableWarning={true}
-            spellCheck={false}
-          >
-            {title}
-          </span>
+          
         </p>
         <div className="progressbar-wrapper">
           <div
@@ -126,11 +135,9 @@ const List = props => {
         <AddTodo listId={id} />
       </div>
 
-      <div>
-          <h3>Delete list </h3>
-          <button onClick={()=>dispatch(deleteList(id))}>Delete!</button>
-      </div>
+      </Card>
     </div>
+    
   );
 };
 

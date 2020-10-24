@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import {  Layout, Menu, Breadcrumb, Typography } from 'antd';
+import {  Layout, Menu, Typography } from 'antd';
 import { 
-    DesktopOutlined,
-    PieChartOutlined,
-    FileOutlined,
-    TeamOutlined,
+    TrophyOutlined,
+    BarsOutlined,
+    NotificationOutlined,
+    InfoCircleOutlined,
     UserOutlined,
 } from '@ant-design/icons'; 
 import './../layout.css'
@@ -17,17 +16,19 @@ const SubMenu = Menu.SubMenu;
 const CustomSider = () => {
 
 const [collapsed, setCollapsed] = useState(0);
-
+console.log(window.location.pathname)
 return (
     <Sider collapsible collapsed={collapsed} onCollapse={()=>{setCollapsed(!collapsed)}}>
         <div className="logo" >
             <L href="/" target="_blank"> ToDo application </L>
         </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-            <Menu.Item key="1" icon={<PieChartOutlined />}>
+        <Menu theme="dark" defaultSelectedKeys={['/']}
+         mode="inline" selectedKeys={[ window.location.pathname ]}> 
+            <Menu.Item key="/" icon={<BarsOutlined />}>
                 <L href="/" className="nav-text">My Superhero Board</L>
+                
             </Menu.Item>
-            <Menu.Item key="2" icon={<DesktopOutlined />}>
+            <Menu.Item key="2" icon={<TrophyOutlined />}>
                 <L href="/achievement" className="nav-text">My Heroism</L>
             </Menu.Item>
             <SubMenu key="sub1" icon={<UserOutlined />} title="My Shelter">
@@ -41,7 +42,7 @@ return (
                     <L href="/logout" className="nav-text">Log Out</L>
                 </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub2" icon={<TeamOutlined />} title="About App">
+            <SubMenu key="sub2" icon={<InfoCircleOutlined />} title="About App">
                 <Menu.Item key="6">
                     <L href="/concepts" className="nav-text">Concept</L>
                 </Menu.Item>
@@ -52,7 +53,7 @@ return (
                     <L href="/contact" className="nav-text">Contact Us</L>
                 </Menu.Item>
             </SubMenu>
-            <Menu.Item key="9" icon={<FileOutlined />}>
+            <Menu.Item key="9" icon={<NotificationOutlined />}>
                 News / Reports
             </Menu.Item>
         </Menu>

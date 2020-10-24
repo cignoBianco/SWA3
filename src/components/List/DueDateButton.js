@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-
+import { 
+ CalendarOutlined
+ } from '@ant-design/icons';
 class DueDateButton extends Component {
   render() {
     return (
@@ -8,7 +10,7 @@ class DueDateButton extends Component {
         title="Set a Due Date"
         onClick={this.props.onClick}
       >
-         Set due date
+         <CalendarOutlined />
       </li>
     );
   }

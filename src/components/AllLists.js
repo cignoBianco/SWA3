@@ -13,15 +13,14 @@ const AllLists = () => {
   return (
     <>
     <Container>
-      <Row md={4}>
+      <div class="flex">
         {lists.map(list => {
           return (
-            <Col>
               <List key={list.id} list={list} visibility={list.visibility} />
-            </Col>);
+            );
         })}
         
-      </Row>
+      </div>
     </Container>
       {lists.length === 0 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['create', '/lists']} /> : null}
     </>

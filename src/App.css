@@ -7,3 +7,25 @@
   display: grid;
   align-content: center;
 }
+
+body .anticon {
+  vertical-align: text-top;
+}
+
+#root {
+  max-height: 100%;
+  overflow-y: hidden;
+}
+
+body div, body li  {
+  list-style: none;
+}
+
+body footer.ant-layout-footer {
+  padding: 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  height: 50px;
+  align-content: center;
+  justify-content: space-around;
+}
