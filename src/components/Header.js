@@ -3,15 +3,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addList, deleteAllLists } from '../actions';
 import EmptyTodoMessage from './EmptyTodoMessage'
 import { Button } from 'antd'
+import './layout.css'
 
 const Header = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
 
+  // TODO: show modal r u sure? if yes -> dispatch
   const renderDeleteAllModal = (
-    <div>
-      <h3>Delete all lists</h3>
-      <button onClick={() => dispatch(deleteAllLists())}>Delete</button>
+    <div className="buttonInHead" style={{right:'10em'}}>
+    <Button type="primary" onClick={() => dispatch(deleteAllLists())} >
+      <span>DeleteAllLists</span>
+    </Button>
     </div>
   );
 
@@ -26,8 +29,7 @@ const Header = () => {
       <div>
         <div>
           <div>
-                <h1>Todo App</h1>
-              <div>
+              <div className="buttonInHead">
                 <CreateButton />
               </div>
           </div>
@@ -39,4 +41,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Header

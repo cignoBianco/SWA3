@@ -94,8 +94,8 @@ const ListTodo = props => {
     } else if (dueDate && datified >= today) {
       return (
         <div className="duedate">
-          <CalendarOutlined />
-          <strong>Due on: </strong> {dueDate}
+          <span></span>
+          Due on:<strong>{dueDate}</strong> 
         </div>
       );
     } else {

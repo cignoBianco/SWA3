@@ -23,17 +23,21 @@
     bottom: 4em;
     left: 0;
     right: 0;
-    transition-property: transform;
-    transition-duration: 2s;
-    transition-timing-function: ease;
-    transform: translateY(20px);
-    animation: 3s opacity0;
+    animation: 3s opacityNdown;
 }
 
-@keyframes opacity0 {
+.buttonInHead {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+@keyframes opacityNdown {
     from {
         opacity: 100%;
+        bottom: 4em;
     } to {
         opacity: 0%;
+        bottom: 2em;
     }
 }

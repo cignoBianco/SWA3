@@ -16,7 +16,6 @@ const SubMenu = Menu.SubMenu;
 const CustomSider = () => {
 
 const [collapsed, setCollapsed] = useState(0);
-console.log(window.location.pathname)
 return (
     <Sider collapsible collapsed={collapsed} onCollapse={()=>{setCollapsed(!collapsed)}}>
         <div className="logo" >

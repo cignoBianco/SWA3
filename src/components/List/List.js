@@ -21,6 +21,8 @@ import EmptyTodoMessage from './../EmptyTodoMessage'
 const List = props => {
   const dispatch = useDispatch();
 
+  const [showArrow, setShowArrow] = useState(0);
+
   const updateTitle = (listId, e) => {
     dispatch(updateListTitle(listId, e.target.textContent));
   };
@@ -29,8 +31,10 @@ const List = props => {
   let message, filteredList, totalCompleted, progressPerc;
 
   if (todos.length === 0) {
-    message = <><EmptyTodoMessage message={'No todos'} link={['todos', '/concepts/todos']} button={['create', '#']} />
-    <ArrowDownOutlined className="downArrow" /></>
+    message = <><EmptyTodoMessage message={'No todos'} link={['todos', '/concepts/todos']} button={['create', '#']}
+     clk={() => {setShowArrow(1); setInterval(() => setShowArrow(0), 5400)}} />
+      {showArrow ? <ArrowDownOutlined className="downArrow" /> : null}
+    </>
   }
 
   filteredList = todos.filter(todo => {
@@ -47,8 +51,8 @@ const List = props => {
   if (filteredList.length === 0 && todos.length !== 0) {
     message = (
       <p className="list-msg">
-        <EmptyTodoMessage message={visibility,' todos'} link={[visibility+' todos', '/concepts/todos']} button={['create', '#'+id]} />
-        
+        <EmptyTodoMessage message={visibility,' todos'} link={[visibility+' todos', '/concepts/todos']}
+          button={['create', '#'+id]} clk={() => {dispatch(showActive(id))}} />
         <br />
         {visibility === 'active'
           ? `completed!`
@@ -64,7 +68,7 @@ const List = props => {
     <div data-id={id} id={id}>
 
   <Card
-    style={{ width: '100%', height: 380 }}
+    style={{ width: '100%', minWidth: 282.5, height: 380 }}
     title={(<span
       className="list-title"
       contentEditable={true}
@@ -132,7 +136,7 @@ const List = props => {
           ))}
           
           {message}
-          
+        
         </div>
 
         
