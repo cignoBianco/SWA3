@@ -16,9 +16,12 @@ const { Header: H, Footer, Content } = Layout;
 const App = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
+  let user;
+  const userId = 9;
 
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem('storedState'));
+    user = JSON.parse(localStorage.getItem('user'));
     if (savedState) {
       dispatch(loadSavedState(savedState));
     }
@@ -26,6 +29,7 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('storedState', JSON.stringify(lists));
+   /// localStorage.setItem('user', JSON.stringify(userId));
   });
 
   return (

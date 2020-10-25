@@ -16,6 +16,8 @@ import {
   SET_DUE_DATE
 } from '../actions/types';
 
+const storedUserId = localStorage.getItem("userId")
+
 const listsReducer = (state = [], action) => {
   switch (action.type) {
 
@@ -84,10 +86,18 @@ const listsReducer = (state = [], action) => {
         }
         return list;
       });
-
-    case SHOW_ALL:
+/*
+      case SHOW_ALL_ABSOLUTLY:
+        return [...state].map(list => {
+          if (action.payload === list.id) {
+            list.visibility = 'all';
+          }
+          return list;
+        });
+    */
+      case SHOW_ALL:
       return [...state].map(list => {
-        if (action.payload === list.id) {
+        if (action.payload === list.id && storedUserId === list.userId) {
           list.visibility = 'all';
         }
         return list;
@@ -133,7 +143,8 @@ const listsReducer = (state = [], action) => {
     case ADD_LIST:
       return [
         {
-          id: action.payload,
+          id: action.payload[0],
+          userId: action.payload[1],
           title: 'New Feat',
           visibility: 'all',
           todos: []

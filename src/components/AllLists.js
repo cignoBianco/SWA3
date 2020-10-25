@@ -9,12 +9,15 @@ import Col from 'react-bootstrap/Col'
 const AllLists = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
   return (
     <>
     <Container>
       <div className="flex">
         {lists.map(list => {
+          console.log(list.userId, currentUser)
+          if (list.userId === currentUser)
           return (
               <List key={list.id} list={list} visibility={list.visibility} />
             );

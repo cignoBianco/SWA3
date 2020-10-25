@@ -16,8 +16,10 @@ import {
   SET_DUE_DATE
 } from '../actions/types';
 
-let listId = 0;
-let todoId = 0;
+const storedListId = +JSON.parse(localStorage.getItem("listId"));
+let listId = storedListId || 0;
+let todoId =  0;
+let userId = JSON.parse(localStorage.getItem("user")) || '';
 
 export const loadSavedState = savedState => ({
   type: LOAD_SAVED_STATE,
@@ -42,6 +44,7 @@ export const addTodo = (newTodo, listId) => ({
   }
 });
 
+
 export const deleteTodo = (listId, todoId) => ({
   type: DELETE_TODO,
   payload: {
@@ -65,9 +68,14 @@ export const showCompleted = listId => ({
   payload: listId
 });
 
-export const showAll = listId => ({
+export const showAllAbsolutly = listId => ({
   type: SHOW_ALL,
   payload: listId
+});
+
+export const showAll = (listId, userId) => ({
+  type: SHOW_ALL,
+  payload: listId, userId
 });
 
 export const updateListTitle = (listId, newTitle) => ({
@@ -85,8 +93,10 @@ export const deleteList = listId => ({
 
 export const addList = () => ({
   type: ADD_LIST,
-  payload: listId++
+  payload: [listId++, userId]
 });
+localStorage.setItem('listId', JSON.stringify(listId));
+
 
 export const updateListTodo = (listId, todoId, newTodo) => ({
   type: UPDATE_LIST_TODO,
