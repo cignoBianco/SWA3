@@ -13,6 +13,12 @@
     background-color: transparent;
   }
 
+  .todoListWrapper {
+    height: 230px;
+    padding: 0 7px;
+    overflow-y: scroll;
+  }
+
   .panel-tabs button:active {
     border-bottom-color: dodgerblue;
       color: dodgerblue;

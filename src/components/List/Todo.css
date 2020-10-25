@@ -1,76 +1,27 @@
-.ListItem {
-  flex-wrap: wrap; /* For due date to show up on next line */
-  align-items: baseline !important;
-  background-color: white;
+.ListTodo {
+  display: grid;
+  grid-template-columns: 15px 2fr 1fr;
 }
-.ListItem .handle-list-item {
-    cursor: move;
-    color: #ccc;
-    padding-right: 0.6rem;
-    margin-left: -0.2rem;
-    position: relative;
 
-  }
+.editable-list-item {
+  outline: none;
+  cursor: pointer;
+  flex: 1;
+  margin-right: 0.5rem;
+}
 
-  .ListItem .handle-list-item::after {
-    content: '';
-    position: absolute;
-    width: 125%;
-    height: 150%;
-    top: -27%;
-    left: -36%;
-  }
+.iconsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around; 
+  align-items: center;
+}
 
-.ListItem  input[type='checkbox'] {
-    transform: scale(1.2);
-  } 
+.closeCalendar {
+  position: absolute;
+  right: 1px;
+}
 
-  .ListItem .action-btns {
-    position: relative;
-    cursor: pointer;
-    outline: none;
-    color: #999;
-  }
-    .ListItem .action-btns:hover,
-    .ListItem .action-btns:focus {
-      color: #333;
-    }
-
-
-
-    .ListItem .action-btns ul {
-      position: absolute;
-      top: 32px;
-      right: -19px;
-      visibility: hidden;
-      opacity: 0;
-      list-style: none;
-      display: inline-block;
-      background-color: white;
-      z-index: 9999;
-      width: 200px;
-      box-shadow: 0px 0px 18px 5px rgba(0, 0, 0, 0.2);
-      border-radius: 4px;
-      padding: 7px 0;
-      transition: opacity 0.4s, visibility 0.4s;
-    }
-      
-    .ListItem .action-btns ul li {
-      padding: 0.5rem 1rem;
-      display: block;
-      cursor: pointer;
-      
-    }
-
-    .ListItem .action-btns ul li:hover {
-      background: #eee;
-    }
-
-
-  .editable-list-item {
-    outline: none;
-    cursor: pointer;
-    flex: 1;
-    margin-right: 0.5rem;
-  
-  }
+.dutdate-btn {
+  display: flex;
+}

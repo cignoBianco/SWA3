@@ -17,3 +17,23 @@
     align-items: center;
     justify-content: center;
 }
+
+.downArrow {
+    position: absolute;
+    bottom: 4em;
+    left: 0;
+    right: 0;
+    transition-property: transform;
+    transition-duration: 2s;
+    transition-timing-function: ease;
+    transform: translateY(20px);
+    animation: 3s opacity0;
+}
+
+@keyframes opacity0 {
+    from {
+        opacity: 100%;
+    } to {
+        opacity: 0%;
+    }
+}

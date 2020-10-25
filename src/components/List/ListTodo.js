@@ -12,7 +12,9 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import DueDateButton from './DueDateButton';
 import { 
-  CloseCircleOutlined, CalendarOutlined
+  CloseCircleOutlined, CalendarOutlined,
+  StarFilled, StarOutlined,
+  CheckCircleOutlined, PlusCircleOutlined
  } from '@ant-design/icons';
 
 const ListTodo = props => {
@@ -107,18 +109,15 @@ const ListTodo = props => {
   
   return (
     <div
-      className={`ListTodo panel-block ${todo.completed ? 'is-active' : ''}`}
+      className={`ListTodo ${todo.completed ? 'is-active' : ''}`}
       key={todo.id}
       data-id={todo.id}
     >
-      <span className="handle-list-todo">
-        <i className="fas fa-grip-vertical" />
-      </span>
-      <input
-        type="checkbox"
-        defaultChecked={todo.completed}
-        onChange={() => onToggleCompleted(listId, todo.id)}
-      />
+      {
+        todo.completed 
+        ? <CheckCircleOutlined onClick={() => onToggleCompleted(listId, todo.id)} />
+        : <PlusCircleOutlined onClick={() => onToggleCompleted(listId, todo.id)} />
+      }
       <span
         style={todo.completed ? { textDecoration: 'line-through' } : null}
         contentEditable={true}
@@ -135,17 +134,14 @@ const ListTodo = props => {
       >
         {todo.todoTodo}
       </span>
-        {todo.important ? 'important' : 'ordinary'}<br/>
-      <span>
-        important?
-        <input type="checkbox" checked={todo.important}
-           onClick={(e) => {
-          onUpdateListImportance(listId, todo.id, !todo.important)
-      }}  name="important" value="important" />
-      </span>
-      <div className="action-btns" tabIndex="0">
-        <i className="fas fa-ellipsis-v" />
-        <ul>
+      <div className="iconsWrapper">
+        {
+          todo.important ? 
+          <StarFilled onClick={(e) => {
+          onUpdateListImportance(listId, todo.id, !todo.important)}} />
+          : <StarOutlined onClick={(e) => {
+            onUpdateListImportance(listId, todo.id, !todo.important)}} />
+        }
         <DatePicker
             customInput={<DueDateButton />}
             onChange={dueDate => onDueDateSelect(listId, todo.id, dueDate)}
@@ -159,28 +155,22 @@ const ListTodo = props => {
             shouldCloseOnSelect={true}
             ref={datepicker}
             minDate={new Date()}
+            onClick={() => {
+              onDueDateSelect(listId, todo.id, null);
+              datepicker.current.setOpen(false);
+            }}
           >
-            <div style={{ clear: 'both', padding: 5 }}>
-              <button
-                className="button is-info clear-btn"
-                onClick={() => {
-                  onDueDateSelect(listId, todo.id, null);
-                  datepicker.current.setOpen(false);
-                }}
-              >
-                Clear
-              </button>
-            </div>
+            <CloseCircleOutlined
+              className="closeCalendar"
+              onClick={() => {
+                onDueDateSelect(listId, todo.id, null);
+                datepicker.current.setOpen(false);
+              }}
+            />
+              
           </DatePicker>
-        
-            
-          <li
-            className="delete-btn"
-          >
-            <CloseCircleOutlined onClick={() => dispatch(deleteTodo(listId, todo.id))} />
-          </li>
-        </ul>
-      </div>
+          <CloseCircleOutlined onClick={() => dispatch(deleteTodo(listId, todo.id))} />
+        </div>
       {todo.dueDate ? renderDueDate : null}
     </div>
   );

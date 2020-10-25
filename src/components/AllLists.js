@@ -4,7 +4,7 @@ import List from './List/List';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import EmptyTodoMessage from './EmptyTodoMessage'
+
 
 const AllLists = () => {
   const dispatch = useDispatch();
@@ -13,7 +13,7 @@ const AllLists = () => {
   return (
     <>
     <Container>
-      <div class="flex">
+      <div className="flex">
         {lists.map(list => {
           return (
               <List key={list.id} list={list} visibility={list.visibility} />
@@ -22,7 +22,7 @@ const AllLists = () => {
         
       </div>
     </Container>
-      {lists.length === 0 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['create', '/lists']} /> : null}
+      
     </>
   );
 };

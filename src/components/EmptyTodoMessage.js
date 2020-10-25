@@ -2,7 +2,11 @@ import React, { useState } from 'react'
 import {  Empty, Button  } from 'antd'
 import './../App.css'
 
-const EmptyTodoMessage = ({message, link, button}) => {
+const EmptyTodoMessage = ({message, link, button, clk=null}) => {
+
+/*
+<a href={button[1]}>
+*/
 
 return (
     <Empty className="grid-center"
@@ -12,11 +16,12 @@ return (
         }}
         description={
         <span>
-           You currently have no <a href={link[1]}> {link[0]}}</a>
+           You currently have no <a href={link[1]}> {link[0]}</a>
         </span>
         }
     >
-        <a href={button[1]}><Button type="primary" action={button[1]}>{button[0]}</Button></a>
+        <Button type="primary" onClick={clk}>{button[0]}</Button>
+        
     </Empty>
     )
 }

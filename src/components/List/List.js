@@ -11,7 +11,7 @@ import {
   showAll
 } from '../../actions';
 import { 
-  CloseCircleOutlined
+  CloseCircleOutlined, ArrowDownOutlined
  } from '@ant-design/icons';
 import ListTodo from './ListTodo';
 import AddTodo from './AddTodo';
@@ -29,7 +29,8 @@ const List = props => {
   let message, filteredList, totalCompleted, progressPerc;
 
   if (todos.length === 0) {
-    message = <EmptyTodoMessage message={'No todos'} link={['todoc', '/concepts/todos']} button={['create', '#']} />
+    message = <><EmptyTodoMessage message={'No todos'} link={['todos', '/concepts/todos']} button={['create', '#']} />
+    <ArrowDownOutlined className="downArrow" /></>
   }
 
   filteredList = todos.filter(todo => {
@@ -47,6 +48,7 @@ const List = props => {
     message = (
       <p className="list-msg">
         <EmptyTodoMessage message={visibility,' todos'} link={[visibility+' todos', '/concepts/todos']} button={['create', '#'+id]} />
+        
         <br />
         {visibility === 'active'
           ? `completed!`
@@ -123,14 +125,17 @@ const List = props => {
             All
           </button>
         </p>
-        <div
+        <div className="todoListWrapper"
         >
           {filteredList.map(todo => (
             <ListTodo todo={todo} listId={id} key={todo.id} />
           ))}
+          
+          {message}
+          
         </div>
 
-        {message}
+        
 
         <AddTodo listId={id} />
       </div>
