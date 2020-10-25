@@ -16,8 +16,8 @@ import {
   SET_DUE_DATE
 } from '../actions/types';
 
-const storedListId = +JSON.parse(localStorage.getItem("listId"));
-let listId = storedListId || 0;
+
+let listId =  0;
 let todoId =  0;
 let userId = JSON.parse(localStorage.getItem("user")) || '';
 
@@ -93,9 +93,8 @@ export const deleteList = listId => ({
 
 export const addList = () => ({
   type: ADD_LIST,
-  payload: [listId++, userId]
+  payload: [userId+''+listId++, userId]
 });
-localStorage.setItem('listId', JSON.stringify(listId));
 
 
 export const updateListTodo = (listId, todoId, newTodo) => ({

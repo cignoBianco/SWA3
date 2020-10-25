@@ -38,7 +38,12 @@ return (
                     <L href="/change-language" className="nav-text">Change Language</L>
                 </Menu.Item>
                 <Menu.Item key="5">
-                    <L href="/logout" className="nav-text">Log Out</L>
+                    <L href="/logout" className="nav-text"
+                    onClick={() => {
+                        localStorage.removeItem('user');
+                        window.location.href="/signin";
+                    }}
+                    >Log Out</L>
                 </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<InfoCircleOutlined />} title="About App">
