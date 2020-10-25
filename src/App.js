@@ -6,13 +6,10 @@ import {  Layout, Breadcrumb, Typography, Tag } from 'antd'
 import CustomSider from './components/core/CustomSider'
 import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
+import Team from './components/statics/Team'
+import Contacts from './components/statics/Contacts'
 import './App.css'
-import { 
-  TwitterOutlined,
-  YoutubeOutlined,
-  FacebookOutlined,
-  LinkedinOutlined,
- } from '@ant-design/icons';
+
 
 const { Header: H, Footer, Content } = Layout;
 
@@ -41,25 +38,13 @@ const App = () => {
           <Content style={{ margin: '0 16px', overflowY: 'scroll' }}>
             <Route path="/" exact component={MainLayout} />
             <Route path="/achievement" component={Achievement} />
+            <Route path="/team" component={Team} />
+            <Route path="/contact" component={Contacts} />
           </Content> 
         </BrowserRouter>
          <Footer>
          <div>
             AntyCryptoniteToDo ©2020 Created by Cigno Bianco
-          </div>
-         <div>
-            <Tag icon={<TwitterOutlined />} color="#55acee">
-              Twitter
-            </Tag>
-            <Tag icon={<YoutubeOutlined />} color="#cd201f">
-              Youtube
-            </Tag>
-            <Tag icon={<FacebookOutlined />} color="#3b5999">
-              Facebook
-            </Tag>
-            <Tag icon={<LinkedinOutlined />} color="#55acee">
-              LinkedIn
-            </Tag>
           </div>
              </Footer>
         </Layout>

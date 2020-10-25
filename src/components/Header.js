@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addList, deleteAllLists } from '../actions';
 import EmptyTodoMessage from './EmptyTodoMessage'
-import { Button } from 'antd'
+import { Button, Modal, Space } from 'antd'
+import {  ExclamationCircleOutlined  } from '@ant-design/icons'
 import './layout.css'
 
 const Header = () => {
@@ -12,7 +13,7 @@ const Header = () => {
   // TODO: show modal r u sure? if yes -> dispatch
   const renderDeleteAllModal = (
     <div className="buttonInHead" style={{right:'10em'}}>
-    <Button type="primary" onClick={() => dispatch(deleteAllLists())} >
+    <Button type="primary" onClick={confirm} >
       <span>DeleteAllLists</span>
     </Button>
     </div>
@@ -22,6 +23,19 @@ const Header = () => {
     return <Button type="primary" onClick={() => dispatch(addList())} >
       <span>Add New List</span>
     </Button>
+  }
+
+  function confirm() {
+    let res = Modal.confirm({
+      title: 'Confirm',
+      icon: <ExclamationCircleOutlined />,
+      content: 'Are you sure?',
+      okText: "I'm sure",
+      cancelText: 'cancel',
+      onOk: () => {dispatch(deleteAllLists()); Modal.destroyAll();},
+      destroyOnClose: true
+    });
+    console.log(res)
   }
 
   return (
