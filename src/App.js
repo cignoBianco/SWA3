@@ -7,10 +7,10 @@ import CustomSider from './components/core/CustomSider'
 import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
+import Language from './components/statics/Language'
 import Signup from './components/user/Signup.js'
 import Contacts from './components/statics/Contacts'
 import './App.css'
-
 
 const { Header: H, Footer, Content } = Layout;
 
@@ -48,6 +48,7 @@ const App = () => {
             <Route path="/achievement" component={Achievement} />
             <Route path="/team" component={Team} />
             <Route path="/contact" component={Contacts} />
+            <Route path="/switch-language" component={Language} />
             
           </Content> 
         </BrowserRouter>
