@@ -8,7 +8,6 @@ import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
 import Signup from './components/user/Signup.js'
-import Signin from './components/user/Signin.js'
 import E403 from './components/core/E403'
 import E404 from './components/core/E404'
 import E500 from './components/core/E500'
@@ -49,7 +48,6 @@ const App = () => {
               <Route exact path="/" component={E403} />
               <Route exact path="/achievement" component={E403} />
               <Route exact path="/signup" component={Signup} />
-              <Route exact path="/signin" component={Signin} />
               <Route exact path="/contact" component={Contacts} />
               <Route exact path="/team" component={Team} />
               <Route exact path="/ooops" component={E500} />
