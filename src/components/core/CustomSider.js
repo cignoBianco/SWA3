@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import {  Layout, Menu, Typography } from 'antd';
+import Player from './../Player'
 import { 
     TrophyOutlined,
     BarsOutlined,
@@ -58,7 +59,7 @@ return (
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="9" icon={<NotificationOutlined />}>
-                News / Reports
+                <Player /> white noise
             </Menu.Item>
         </Menu>
     </Sider>
