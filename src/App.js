@@ -12,6 +12,7 @@ import E403 from './components/core/E403'
 import E404 from './components/core/E404'
 import E500 from './components/core/E500'
 import Contacts from './components/statics/Contacts'
+import Player from './components/Player'
 import './App.css'
 
 
@@ -50,6 +51,7 @@ const App = () => {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/contact" component={Contacts} />
               <Route exact path="/team" component={Team} />
+              <Route exact path="/player" component={Player} />
               <Route exact path="/ooops" component={E500} />
               <Route path="*" component={E404} />
             </Switch>
@@ -59,6 +61,7 @@ const App = () => {
               <Route exact path="/achievement" component={Achievement} />
               <Route exact path="/contact" component={Contacts} />
               <Route exact path="/team" component={Team} />
+              <Route exact path="/player" component={Player} />
               <Route exact path="/ooops" component={E500} />
               <Route path="*" component={E404} />
             </Switch>
