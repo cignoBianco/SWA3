@@ -80,7 +80,7 @@ const List = props => {
   <Card
     style={{ width: '100%', minWidth: 282.5, height: 380,
     borderTop: `15px solid ${Color(color)}`
-  }}  onClick={e => updateColor(id, color)}
+  }} 
     title={(<span
       className="list-title"
       contentEditable={true}
