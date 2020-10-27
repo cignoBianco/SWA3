@@ -13,12 +13,19 @@ import E404 from './components/core/E404'
 import E500 from './components/core/E500'
 import Contacts from './components/statics/Contacts'
 import Player from './components/Player'
+import { useTranslation } from "react-i18next";
 import './App.css'
 
 
 const { Header: H, Footer, Content } = Layout;
 
 const App = () => {
+
+  const { t, i18n } = useTranslation();
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
+
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
   let user = JSON.parse(localStorage.getItem('user'));
@@ -42,6 +49,12 @@ const App = () => {
        <CustomSider/>
        <Layout className="site-layout">
           <H className="site-layout-background" style={{ padding: 0 }} />
+          <button onClick={() => changeLanguage("en")}>EN</button>
+          <button onClick={() => changeLanguage("ru")}>RU</button>
+          <hr />
+          <div><h1>{t("title")}</h1></div>
+          <div>{t("description.part1")}</div>
+          <div>{t("description.part2")}</div>
         <BrowserRouter>
           <Content style={{ margin: '0 16px', overflowY: 'scroll' }}>
             {!user ? (<>
