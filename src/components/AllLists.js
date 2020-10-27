@@ -16,7 +16,6 @@ const AllLists = () => {
     <Container>
       <div className="flex">
         {lists.map(list => {
-          console.log(list.userId, currentUser)
           if (list.userId === currentUser)
           return (
               <List key={list.id} list={list} visibility={list.visibility} />

@@ -20,7 +20,6 @@ const App = () => {
   let user = JSON.parse(localStorage.getItem('user'));
   const userId = 9;
 
-
   useEffect(() => {
     const savedState = JSON.parse(localStorage.getItem('storedState'));
     user = JSON.parse(localStorage.getItem('user'));
@@ -31,7 +30,6 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('storedState', JSON.stringify(lists));
-   /// localStorage.setItem('user', JSON.stringify(userId));
   });
 
   return (

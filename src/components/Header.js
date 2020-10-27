@@ -10,7 +10,6 @@ const Header = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
 
-  // TODO: show modal r u sure? if yes -> dispatch
   const renderDeleteAllModal = (
     <div className="buttonInHead" style={{right:'10em'}}>
     <Button type="primary" onClick={confirm} >

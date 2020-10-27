@@ -13,7 +13,8 @@ import {
   UPDATE_LIST_TODO,
   DELETE_ALL_LISTS,
   UPDATE_LIST_IMPORTANCE,
-  SET_DUE_DATE
+  SET_DUE_DATE,
+  UPDATE_LIST_COLOR
 } from '../actions/types';
 
 const storedUserId = localStorage.getItem("userId")
@@ -110,6 +111,14 @@ const listsReducer = (state = [], action) => {
         }
         return list;
       });
+      
+    case UPDATE_LIST_COLOR:
+      return [...state].map(list => {
+        if (action.payload.listId === list.id) {
+          list.color = action.payload.newColor;
+        }
+        return list;
+      });
 
     case UPDATE_LIST_TODO:
       return [...state].map(list => {
@@ -147,6 +156,7 @@ const listsReducer = (state = [], action) => {
           userId: action.payload[1],
           title: 'New Feat',
           visibility: 'all',
+          color: 0,
           todos: []
         },
         ...state

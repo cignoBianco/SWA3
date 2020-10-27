@@ -4,6 +4,7 @@ import {  Card } from 'antd';
 import './../layout.css'
 import {
   updateListTitle,
+  updateListColor,
   deleteList,
   showActive,
   showImportant,
@@ -17,6 +18,7 @@ import ListTodo from './ListTodo';
 import AddTodo from './AddTodo';
 import './List.css';
 import EmptyTodoMessage from './../EmptyTodoMessage'
+import Color from './../core/Color'
 
 const List = props => {
   const dispatch = useDispatch();
@@ -27,8 +29,16 @@ const List = props => {
     dispatch(updateListTitle(listId, e.target.textContent));
   };
 
-  const { id, title, todos, visibility } = props.list;
+  const updateColor = (listId, e) => {
+    let newColor = e >= 5 ? 0 : ++e
+    Color(newColor)
+    dispatch(updateListColor(listId, newColor));
+  };
+
+  const { id, title, color, todos, visibility } = props.list;
   let message, filteredList, totalCompleted, progressPerc;
+
+  const [clr, setClr] = useState(color);
 
   if (todos.length === 0) {
     message = <><EmptyTodoMessage message={'No todos'} link={['todos', '/concepts/todos']} button={['create', '#']}
@@ -68,7 +78,9 @@ const List = props => {
     <div data-id={id} id={id}>
 
   <Card
-    style={{ width: '100%', minWidth: 282.5, height: 380 }}
+    style={{ width: '100%', minWidth: 282.5, height: 380,
+    borderTop: `15px solid ${Color(color)}`
+  }}  onClick={e => updateColor(id, color)}
     title={(<span
       className="list-title"
       contentEditable={true}
@@ -82,11 +94,23 @@ const List = props => {
       suppressContentEditableWarning={true}
       spellCheck={false}
     >
-      {title}
+      {}
+      {title} 
     </span>)}
+ 
+    extra={
+      <div className="flex" style={{
+        width: 30,
+        alignItems: 'center'
+      }}>
+        <div onClick={e => updateColor(id, color)} style={{
+          width: 13, height: 13, borderRadius: '50%', backgroundColor: `${Color(color+1)}`
+        }}></div>
+        <CloseCircleOutlined onClick={()=>dispatch(deleteList(id))} />
+      </div>
     
-    extra={<CloseCircleOutlined onClick={()=>dispatch(deleteList(id))} /> }
-  >
+  }
+  > 
   
       <div className="panel">
         <p className="panel-heading">

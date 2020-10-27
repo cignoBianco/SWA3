@@ -13,7 +13,8 @@ import {
   DELETE_ALL_LISTS,
   UPDATE_LIST_IMPORTANCE,
   SHOW_IMPORTANT,
-  SET_DUE_DATE
+  SET_DUE_DATE,
+  UPDATE_LIST_COLOR
 } from '../actions/types';
 
 
@@ -83,6 +84,14 @@ export const updateListTitle = (listId, newTitle) => ({
   payload: {
     listId,
     newTitle
+  }
+});
+
+export const updateListColor = (listId, newColor) => ({
+  type: UPDATE_LIST_COLOR,
+  payload: {
+    listId,
+    newColor
   }
 });
 

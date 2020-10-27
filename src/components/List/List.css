@@ -141,6 +141,11 @@ body .ant-card-head {
   max-height: 38px;
 }
 
+
+body .ant-card-head-title {
+  padding: 0; 
+}
+
 .flex {
   display: flex;
   flex-wrap: wrap;
