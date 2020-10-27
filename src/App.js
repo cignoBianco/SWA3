@@ -8,6 +8,7 @@ import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
 import Signup from './components/user/Signup.js'
+import E403 from './components/core/E403'
 import Contacts from './components/statics/Contacts'
 import './App.css'
 
@@ -40,13 +41,19 @@ const App = () => {
           <H className="site-layout-background" style={{ padding: 0 }} />
         <BrowserRouter>
           <Content style={{ margin: '0 16px', overflowY: 'scroll' }}>
-            {!user && <Route path="/" component={Signup} /> }
-        
+            {!user && (<>
+              <Route exact path="/" component={E403} />
+              <Route path="/achievement" component={E403} />
+              <Route path="/signup" component={Signup} />
+            </>)  }
+        { user && (<>
             <Route path="/" exact component={MainLayout} />
             <Route path="/achievement" component={Achievement} />
-            <Route path="/team" component={Team} />
+            </>
+          )
+        }
             <Route path="/contact" component={Contacts} />
-            
+            <Route path="/team" component={Team} />
           </Content> 
         </BrowserRouter>
          <Footer>
