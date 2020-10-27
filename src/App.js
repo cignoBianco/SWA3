@@ -24,10 +24,15 @@ const App = () => {
   const { t, i18n } = useTranslation();
   const [lang, toggleLang] = useState("en")
   const changeLanguage = (language) => {
-    lang === "en" ?
-    i18n.changeLanguage("ru") : 
+    console.log(lang, language)
+
+    if (lang == "en") {
+    i18n.changeLanguage("ru") 
+        toggleLang("ru")
+  } else {
     i18n.changeLanguage("en");
-    toggleLang("ru")
+    toggleLang("en")
+    }
   };
 
   const dispatch = useDispatch();
@@ -53,9 +58,6 @@ const App = () => {
        <CustomSider changeLanguage={() => changeLanguage("en")} />
        <Layout className="site-layout">
           <H className="site-layout-background" style={{ padding: 0 }} />
-          <div><h1>{t("title")}</h1></div>
-          <div>{t("description.part1")}</div>
-          <div>{t("description.part2")}</div>
         <BrowserRouter>
           <Content style={{ margin: '0 16px', overflowY: 'scroll' }}>
             {!user ? (<>
@@ -84,7 +86,7 @@ const App = () => {
         </BrowserRouter>
          <Footer>
          <div>
-            AntyCryptoniteToDo ©2020 Created by Cigno Bianco
+            AntyCryptoniteToDo ©2020 {t("Created by")} Cigno Bianco
           </div>
              </Footer>
         </Layout>

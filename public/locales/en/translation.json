@@ -1,7 +1,71 @@
 {
-    "title": "Internationalizing with i18next",
-    "description": {
-      "part1": "To get started, edit <1>src/App.js</1> and save to reload.",
-      "part2": "Switch language between english and russian using buttons above."
-    }
-  }
+  "sidebar": {
+      "lang": "en",
+      "title": "ToDo application",
+      "board ": "My Superhero Board",
+      "heroism": "My Heroism",
+      "profile": {
+          "title": "My Shelter",
+          "edit": "Edit Profile",
+          "language": "Change Language",
+          "logout": "Log Out"
+      },
+      "about": {
+          "title": "About App",
+          "concept": "Concept",
+          "team": "Developers Team",
+          "contact": "Contact Us"
+      },
+      "news": "News / Reports"
+  },
+  "buttons": {
+      "delete": "Delete All Lists",
+      "add": "Add New List",
+      "cancel": "cancel",
+      "confirm": "I'm sure",
+      "create": "create",
+      "continueRescue": "Continue rescue",
+      "signup": "New account",
+      "Submit": "Submit",
+      "Cancel": "Cancel"
+  },
+  "forms": {
+      "signup": {
+          "labels": {
+              "name": "Name",
+              "Url": "Url",
+              "Owner": "Owner",
+              "Type": "Type",
+              "Approver": "Approver",
+              "DateTime": "DateTime",
+              "Description": "Description",
+              "AddTodo": "Add Todo"
+          },
+          "inputs": {
+              "name": "Please enter user name",
+              "Url": "Please enter url",
+              "Owner": "Please select an owner",
+              "Type": "Please choose the type",
+              "Approver": "Please choose the approver",
+              "DateTime": "StartDate",
+              "DateTime2": "EndDate",
+              "Description": "please enter url description"
+          }
+      }
+  },
+  "card": {
+      "title": "New Feat",
+      "filters": {
+         "active": "Active",
+          "important": "Important",
+          "completed": "Completed",
+          "all": "All"
+      },
+      "You currently have no ": "You currently have no ",
+      "todos": "todos",
+      "completed": "completed",
+      "important": "important",
+      "active": "active"
+  },
+  "Created by": "Created by "
+}

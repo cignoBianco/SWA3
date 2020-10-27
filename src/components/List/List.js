@@ -19,8 +19,14 @@ import AddTodo from './AddTodo';
 import './List.css';
 import EmptyTodoMessage from './../EmptyTodoMessage'
 import Color from './../core/Color'
+import { useTranslation } from "react-i18next";
+//const { t, i18n } = useTranslation();
+// {t("")} 
 
 const List = props => {
+
+  const { t, i18n } = useTranslation();
+
   const dispatch = useDispatch();
 
   const [showArrow, setShowArrow] = useState(0);
@@ -41,7 +47,7 @@ const List = props => {
   const [clr, setClr] = useState(color);
 
   if (todos.length === 0) {
-    message = <><EmptyTodoMessage message={'No todos'} link={['todos', '/concepts/todos']} button={['create', '#']}
+    message = <><EmptyTodoMessage message={t("card.todos")} link={[`${t("card.todos")}`, '/concepts/todos']} button={[`${t("buttons.create")}`, '#']}
      clk={() => {setShowArrow(1); setInterval(() => setShowArrow(0), 5400)}} />
       {showArrow ? <ArrowDownOutlined className="downArrow" /> : null}
     </>
@@ -61,8 +67,8 @@ const List = props => {
   if (filteredList.length === 0 && todos.length !== 0) {
     message = (
       <p className="list-msg">
-        <EmptyTodoMessage message={visibility,' todos'} link={[visibility+' todos', '/concepts/todos']}
-          button={['create', '#'+id]} clk={() => {dispatch(showActive(id))}} />
+        <EmptyTodoMessage message={visibility,` ${t("card.todos")}`} link={[visibility+` ${t("card.todos")}`, '/concepts/todos']}
+          button={[`${t("buttons.create")}`, '#'+id]} clk={() => {dispatch(showActive(id))}} />
         <br />
         {visibility === 'active'
           ? `completed!`
@@ -94,7 +100,7 @@ const List = props => {
       suppressContentEditableWarning={true}
       spellCheck={false}
     >
-      {}
+      
       {title} 
     </span>)}
  
@@ -132,25 +138,25 @@ const List = props => {
             onClick={() => dispatch(showActive(id))}
             className={visibility === 'active' ? 'is-active' : null}
           >
-            Active
+            {t("card.filters.active")}
           </button>
           <button
             onClick={() => dispatch(showImportant(id))}
             className={visibility === 'important' ? 'is-active' : null}
           >
-            Important
+            {t("card.filters.important")}
           </button>
           <button
             onClick={() => dispatch(showCompleted(id))}
             className={visibility === 'completed' ? 'is-active' : null}
           >
-            Completed
+             {t("card.filters.completed")}
           </button>
           <button
             onClick={() => dispatch(showAll(id))}
             className={visibility === 'all' ? 'is-active' : null}
           >
-            All
+            {t("card.filters.all")}
           </button>
         </p>
         <div className="todoListWrapper"

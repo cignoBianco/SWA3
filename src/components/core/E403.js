@@ -1,8 +1,12 @@
 import React from 'react'
 import { Result, Button } from 'antd'
 import Signup from './../user/Signup'
+import { useTranslation } from "react-i18next";
+
 
 const E403 = () => {
+    const { t, i18n } = useTranslation();
+// {t("")} 
     return (
         <Result
             status="403"

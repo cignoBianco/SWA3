@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 import {  Empty, Button  } from 'antd'
 import './../App.css'
+import { useTranslation } from "react-i18next";
+//const { t, i18n } = useTranslation();
+// {t("")} 
 
 const EmptyTodoMessage = ({message, link, button, clk=null}) => {
 
 /*
 <a href={button[1]}>
 */
+const { t, i18n } = useTranslation(); 
 
 return (
     <Empty className="grid-center"
@@ -16,7 +20,7 @@ return (
         }}
         description={
         <span>
-           You currently have no <a href={link[1]}> {link[0]}</a>
+           {t("card.You currently have no ")} <a href={link[1]}> {link[0]}</a>
         </span>
         }
     >
