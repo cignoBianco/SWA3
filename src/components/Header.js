@@ -9,6 +9,13 @@ import './layout.css'
 const Header = () => {
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
+  const currentUser = localStorage.getItem('user')
+
+console.log(1, lists)
+let noLists = lists.reduce((ac, cur)=>{
+  console.log(cur.userId, +currentUser)
+  if(cur.userId == +currentUser) ac = 1
+}, 0) > 0 ? 1 : 0
 
   const renderDeleteAllModal = (
     <div className="buttonInHead" style={{right:'10em'}}>
@@ -48,8 +55,9 @@ const Header = () => {
           </div>
         </div>
       </div>
-      {lists.length > 0 ? renderDeleteAllModal : ''}
-      {lists.length === 0 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['Create List', '/lists']} clk={() => dispatch(addList())} /> : null}
+      {lists.length < 1 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['Create List', '/lists']} clk={() => dispatch(addList())} /> : ''}
+      { noLists ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['Create List', '/lists']} clk={() => dispatch(addList())} />
+    : renderDeleteAllModal }
     </>
   );
 };
