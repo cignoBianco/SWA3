@@ -7,14 +7,18 @@ import {
     NotificationOutlined,
     InfoCircleOutlined,
     UserOutlined,
-} from '@ant-design/icons'; 
+} from '@ant-design/icons'
+import { useTranslation } from "react-i18next";
 import './../layout.css'
+
 
 const { Sider } = Layout;
 const { Title, Text, Link : L } = Typography;
 const SubMenu = Menu.SubMenu;
 
-const CustomSider = () => {
+const CustomSider = ({ changeLanguage }) => {
+
+const { t, i18n } = useTranslation();
 
 const [collapsed, setCollapsed] = useState(0);
 return (
@@ -36,7 +40,11 @@ return (
                     <L href="/edit-profile" className="nav-text">Edit Profile</L>
                 </Menu.Item>
                 <Menu.Item key="4">
-                    <L href="/change-language" className="nav-text">Change Language</L>
+                    <L to="/change-language" className="nav-text" onClick={() =>changeLanguage()}>
+                        Change Language
+                        <button onClick={() => changeLanguage("en")}>EN</button>
+                        <button onClick={() => changeLanguage("ru")}>RU</button>
+                    </L>
                 </Menu.Item>
                 <Menu.Item key="5">
                     <L href="/logout" className="nav-text"

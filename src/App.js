@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadSavedState } from './actions';
@@ -22,8 +22,12 @@ const { Header: H, Footer, Content } = Layout;
 const App = () => {
 
   const { t, i18n } = useTranslation();
+  const [lang, toggleLang] = useState("en")
   const changeLanguage = (language) => {
-    i18n.changeLanguage(language);
+    lang === "en" ?
+    i18n.changeLanguage("ru") : 
+    i18n.changeLanguage("en");
+    toggleLang("ru")
   };
 
   const dispatch = useDispatch();
@@ -46,12 +50,9 @@ const App = () => {
   return (
     <div className="App">
       <Layout style={{ maxHeight: '100vh', minHeight: '100vh', overflowY: 'hidden' }}>
-       <CustomSider/>
+       <CustomSider changeLanguage={() => changeLanguage("en")} />
        <Layout className="site-layout">
           <H className="site-layout-background" style={{ padding: 0 }} />
-          <button onClick={() => changeLanguage("en")}>EN</button>
-          <button onClick={() => changeLanguage("ru")}>RU</button>
-          <hr />
           <div><h1>{t("title")}</h1></div>
           <div>{t("description.part1")}</div>
           <div>{t("description.part2")}</div>
