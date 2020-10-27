@@ -1,15 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import List from './List/List';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Config from './../Config'
 
 
 const AllLists = () => {
   const dispatch = useDispatch();
+  //let 
   const lists = useSelector(state => state.lists);
   const currentUser = JSON.parse(localStorage.getItem('user'));
+/*
+  useEffect(() => {
+    fetch(`${Config('ApiUrl')}lists`)
+      .then(res => res.json())
+      .then(
+        (result) => {
+        console.log(result)
+             lists=  result.items
+         
+        },
+        (error) => {
+          console.log(error)
+          
+        }
+      )
+  })*/
 
   return (
     <>

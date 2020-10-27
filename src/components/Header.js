@@ -5,6 +5,7 @@ import EmptyTodoMessage from './EmptyTodoMessage'
 import { Button, Modal, Space } from 'antd'
 import {  ExclamationCircleOutlined  } from '@ant-design/icons'
 import './layout.css'
+import Config from './../Config'
 import { useTranslation } from "react-i18next";
 //const { t, i18n } = useTranslation();
 // {t("")}
@@ -33,7 +34,31 @@ let noLists = lists.reduce((ac, cur)=>{
   );
 
   const CreateButton = () => { 
-    return <Button type="primary" onClick={() => dispatch(addList())} >
+    return <Button type="primary" onClick={() => {dispatch(addList())
+     /* fetch(`${Config('ApiUrl')}lists`, {
+        method: "POST",
+        mode: "cors",
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: 
+          JSON.stringify(JSON.parse('{"color": 0, "name": "string","priority": "HIGH" }'))
+        
+      })
+      .then(res => res.json())
+      .then(
+        (result) => {
+        console.log(result)
+           //  lists=  result.items
+         
+        },
+        (error) => {
+          console.log(error)
+          
+        }
+      ).catch((e) => console.log(e))*/
+    }} >
       <span>{t("buttons.add")}</span>
     </Button>
   }
