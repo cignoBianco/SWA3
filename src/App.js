@@ -9,6 +9,7 @@ import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
 import Signup from './components/user/Signup.js'
 import E403 from './components/core/E403'
+import E404 from './components/core/E404'
 import Contacts from './components/statics/Contacts'
 import './App.css'
 
@@ -54,6 +55,7 @@ const App = () => {
         }
             <Route path="/contact" component={Contacts} />
             <Route path="/team" component={Team} />
+            <Route component={E404} />
           </Content> 
         </BrowserRouter>
          <Footer>

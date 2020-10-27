@@ -8,9 +8,13 @@ const E403 = () => {
             status="403"
             title="403"
             subTitle="Sorry, you are not authorized to access this page."
-            extra={<Signup />}
+            extra={<>
+               
+                <Signup />
+                </>
+            }
         />
     )
 }
-// <Button type="primary">Back Home</Button>
+//
 export default E403
