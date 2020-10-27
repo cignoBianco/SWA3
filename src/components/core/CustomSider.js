@@ -59,7 +59,7 @@ return (
                 </Menu.Item>
             </SubMenu>
             <Menu.Item key="9" icon={<NotificationOutlined />}>
-                <Player /> white noise
+                <Player />white noise
             </Menu.Item>
         </Menu>
     </Sider>
