@@ -41,7 +41,7 @@ return (
                     <L href="/logout" className="nav-text"
                     onClick={() => {
                         localStorage.removeItem('user');
-                        window.location.href="/signin";
+                        window.location.href="/signup";
                     }}
                     >Log Out</L>
                 </Menu.Item>

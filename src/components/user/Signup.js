@@ -1,11 +1,47 @@
-import React, { useState } from 'react'
-import {  Layout, Tabs, Typography, Drawer, Form,
-  Button, Col, Row, Input, Select, DatePicker, Checkbox } from 'antd';
+import React, { useState, createRef } from 'react'
+import {  Layout, Tabs, Typography, Drawer, Form, 
+  Button, Col, Row, Input, Select, DatePicker, Checkbox,
+  Tooltip, AutoComplete, Cascader, } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
-import {  PlusOutlined, UserOutlined, LockOutlined } from '@ant-design/icons'
+import {  PlusOutlined, UserOutlined, LockOutlined,
+  EyeInvisibleOutlined, EyeTwoTone, QuestionCircleOutlined } from '@ant-design/icons'
 import { StickyContainer, Sticky } from 'react-sticky';
+import Captcha from "react-numeric-captcha";
+import "./captcha.css";
 
 const { Option } = Select;
+const AutoCompleteOption = AutoComplete.Option;
+const formItemLayout = {
+  labelCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 8,
+    },
+  },
+  wrapperCol: {
+    xs: {
+      span: 24,
+    },
+    sm: {
+      span: 16,
+    },
+  },
+};
+const tailFormItemLayout = {
+  wrapperCol: {
+    xs: {
+      span: 24,
+      offset: 0,
+    },
+    sm: {
+      span: 16,
+      offset: 8,
+    },
+  },
+};
+
 const { Content, Footer } = Layout;
 const { TabPane } = Tabs;
 
@@ -16,11 +52,61 @@ const renderTabBar = (props, DefaultTabBar) => (
     )}
   </Sticky>
 );
+
 const Signup = () => {
-    
+ 
   const [visible, setVisible] = useState(0);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+    localStorage.setItem('user', Date.now());
+    setVisible(0);
+    window.location.href='/';
+  };
+
+  const [form] = Form.useForm();
+
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select
+        style={{
+          width: 70,
+        }}
+      >
+        <Option value="86">+7</Option>
+        <Option value="375">+8</Option>
+      </Select>
+    </Form.Item>
+  );
+  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+
+  const onWebsiteChange = (value) => {
+    if (!value) {
+      setAutoCompleteResult([]);
+    } else {
+      setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
+    }
+  };
+
+  const websiteOptions = autoCompleteResult.map((website) => ({
+    label: website,
+    value: website,
+  }));
+  const [getCaptcha, toggleCaptcha] = useState(0)
+  const [ captchaDone, setCaptchaDone ] = useState(0)
+  let captcha = createRef();
+  let [captchaMessage, setCaptchaMessage] = useState('');
+  const captchaSubmit = e => {
+    
+    //e.preventDefault();
+    if (captchaDone) {
+      setCaptchaMessage("Form submitted ")
+      toggleCaptcha(0)
+    } else {
+      setCaptchaMessage("Wrong captcha! Try again. ")
+      console.log('wrong')
+    }
+
+    
   };
 
     return (
@@ -46,111 +132,166 @@ const Signup = () => {
           <StickyContainer>
             <Tabs defaultActiveKey="1" renderTabBar={renderTabBar}>
               <TabPane tab="Registration" key="1" >
-                <Form layout="vertical" hideRequiredMark>
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Form.Item
-                      name="name"
-                      label="Name"
-                      rules={[{ required: true, message: 'Please enter user name' }]}
-                    >
-                      <Input placeholder="Please enter user name" />
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="url"
-                      label="Url"
-                      rules={[{ required: true, message: 'Please enter url' }]}
-                    >
-                      <Input
-                        style={{ width: '100%' }}
-                        addonBefore="http://"
-                        addonAfter=".com"
-                        placeholder="Please enter url"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Form.Item
-                      name="owner"
-                      label="Owner"
-                      rules={[{ required: true, message: 'Please select an owner' }]}
-                    >
-                      <Select placeholder="Please select an owner">
-                        <Option value="xiao">Xiaoxiao Fu</Option>
-                        <Option value="mao">Maomao Zhou</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="type"
-                      label="Type"
-                      rules={[{ required: true, message: 'Please choose the type' }]}
-                    >
-                      <Select placeholder="Please choose the type">
-                        <Option value="private">Private</Option>
-                        <Option value="public">Public</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col span={12}>
-                    <Form.Item
-                      name="approver"
-                      label="Approver"
-                      rules={[{ required: true, message: 'Please choose the approver' }]}
-                    >
-                      <Select placeholder="Please choose the approver">
-                        <Option value="jack">Jack Ma</Option>
-                        <Option value="tom">Tom Liu</Option>
-                      </Select>
-                    </Form.Item>
-                  </Col>
-                  <Col span={12}>
-                    <Form.Item
-                      name="dateTime"
-                      label="DateTime"
-                      rules={[{ required: true, message: 'Please choose the dateTime' }]}
-                    >
-                      <DatePicker.RangePicker
-                        style={{ width: '100%' }}
-                        getPopupContainer={trigger => trigger.parentElement}
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Row gutter={16}>
-                  <Col span={24}>
-                    <Form.Item
-                      name="description"
-                      label="Description"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'please enter url description',
-                        },
-                      ]}
-                    >
-                      <Input.TextArea rows={4} placeholder="please enter url description" />
-                    </Form.Item>
-                    <Form.Item>
-                      <Button type="primary" htmlType="submit" className="login-form-button"
-                        onClick={() => {
-                          localStorage.setItem('user', Date.now());
-                          setVisible(0);
-                          window.location.href='/';
-                        }}>
-                      Sign in
-                      </Button>
-                  </Form.Item>
-                  </Col>
-                </Row>
+              <Form
+                {...formItemLayout}
+                form={form}
+                name="register"
+                onFinish={onFinish}
+                initialValues={{
+                  prefix: '7',
+                }}
+                scrollToFirstError
+              >
+                <Form.Item
+                  name="email"
+                  label="E-mail"
+                  rules={[
+                    {
+                      type: 'email',
+                      message: 'The input is not valid E-mail!',
+                    },
+                    {
+                      required: true,
+                      message: 'Please input your E-mail!',
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  name="password"
+                  label="Password"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password!',
+                    },
+                  ]}
+                  hasFeedback
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                  name="confirm"
+                  label="Confirm Password"
+                  dependencies={['password']}
+                  hasFeedback
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please confirm your password!',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        if (!value || getFieldValue('password') === value) {
+                          return Promise.resolve();
+                        }
+
+                        return Promise.reject('The two passwords that you entered do not match!');
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password />
+                </Form.Item>
+
+                <Form.Item
+                  name="nickname"
+                  label={
+                    <span>
+                      Nickname&nbsp;
+                      <Tooltip title="What do you want others to call you?">
+                        <QuestionCircleOutlined />
+                      </Tooltip>
+                    </span>
+                  }
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your nickname!',
+                      whitespace: true,
+                    },
+                  ]}
+                >
+                  <Input />
+                </Form.Item>
+
+                <Form.Item
+                  name="phone"
+                  label="Phone Number"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your phone number!',
+                    },
+                  ]}
+                >
+                  <Input
+                    addonBefore={prefixSelector}
+                    style={{
+                      width: '100%',
+                    }}
+                  />
+                </Form.Item>
+
+                <Form.Item
+                  name="website"
+                  label="Website"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input website!',
+                    },
+                  ]}
+                >
+                  <AutoComplete options={websiteOptions} onChange={onWebsiteChange} placeholder="website">
+                    <Input />
+                  </AutoComplete>
+                </Form.Item>
+
+                <Form.Item label="Captcha" extra="We must make sure that your are a human.">      
+                      <Button onClick={()=>{toggleCaptcha(1)}}>Get captcha</Button>
+                    <br/><p style={{color: 'red'}}>{captchaMessage}</p>
+                </Form.Item>
+                { getCaptcha ?
+                <form onSubmit={captchaSubmit}
+                  style={{textAlign:'-webkit-center',
+                  width: '100%',
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: 30
+                }}
+                >
+                  <Captcha
+                    ref={captcha}
+                    onChange={status => {console.log(status);setCaptchaDone(status)}}
+                  />
+                </form>
+                : null  }
+                <Form.Item
+                  name="agreement"
+                  valuePropName="checked"
+                  rules={[
+                    {
+                      validator: (_, value) =>
+                        value ? Promise.resolve() : Promise.reject('Should accept agreement'),
+                    },
+                  ]}
+                  {...tailFormItemLayout}
+                >
+                  <Checkbox>
+                    I have read the <a href="">agreement</a>
+                  </Checkbox>
+                </Form.Item>
+                <Form.Item {...tailFormItemLayout}>
+                  <Button type="primary" htmlType="submit">
+                    Register
+                  </Button>
+                </Form.Item>
               </Form>
+  
               </TabPane>
               <TabPane tab="Login" key="2">
                 <Form
@@ -214,4 +355,3 @@ const Signup = () => {
 }
 
 export default Signup
-
