@@ -8,6 +8,9 @@ import {  PlusOutlined, UserOutlined, LockOutlined,
 import { StickyContainer, Sticky } from 'react-sticky';
 import Captcha from "react-numeric-captcha";
 import "./captcha.css";
+import { useTranslation } from "react-i18next";
+//const { t, i18n } = useTranslation();
+// {t("")}
 
 const { Option } = Select;
 const AutoCompleteOption = AutoComplete.Option;
@@ -55,6 +58,9 @@ const renderTabBar = (props, DefaultTabBar) => (
 
 const Signup = () => {
  
+  const { t, i18n } = useTranslation();
+// {t("")}
+
   const [visible, setVisible] = useState(0);
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -112,7 +118,7 @@ const Signup = () => {
     return (
       <>
         <Button type="primary" onClick={() => setVisible(1)}>
-          <PlusOutlined /> New account
+          <PlusOutlined /> {t("buttons.signup")}
         </Button>
         <Drawer
           //title="Create a new account"

@@ -5,8 +5,15 @@ import {  Input } from 'antd';
 import { 
   EditOutlined
  } from '@ant-design/icons';
+ import { useTranslation } from "react-i18next";
+//const { t, i18n } = useTranslation();
+// {t("")} 
 
 const AddTodo = props => {
+
+  const { t, i18n } = useTranslation();
+// {t("")} 
+
   const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState('');
 
@@ -30,7 +37,7 @@ const AddTodo = props => {
           placeholder="Password"
           type="text"
           className="input is-small"
-          placeholder="Add Todo"
+          placeholder={t("forms.signup.labels.AddTodo")} 
           onChange={e => setNewTodo(e.target.value)}
           value={newTodo}
         />

@@ -5,8 +5,15 @@ import EmptyTodoMessage from './EmptyTodoMessage'
 import { Button, Modal, Space } from 'antd'
 import {  ExclamationCircleOutlined  } from '@ant-design/icons'
 import './layout.css'
+import { useTranslation } from "react-i18next";
+//const { t, i18n } = useTranslation();
+// {t("")}
 
 const Header = () => {
+
+  const { t, i18n } = useTranslation();
+  // {t("")}
+
   const dispatch = useDispatch();
   const lists = useSelector(state => state.lists);
   const currentUser = localStorage.getItem('user')
@@ -20,24 +27,24 @@ let noLists = lists.reduce((ac, cur)=>{
   const renderDeleteAllModal = (
     <div className="buttonInHead" style={{right:'10em'}}>
     <Button type="primary" onClick={confirm} >
-      <span>DeleteAllLists</span>
+      <span>{t("buttons.delete")}</span>
     </Button>
     </div>
   );
 
   const CreateButton = () => { 
     return <Button type="primary" onClick={() => dispatch(addList())} >
-      <span>Add New List</span>
+      <span>{t("buttons.add")}</span>
     </Button>
   }
 
   function confirm() {
     let res = Modal.confirm({
-      title: 'Confirm',
+      title: `${t("buttons.confirm")}`,
       icon: <ExclamationCircleOutlined />,
       content: 'Are you sure?',
-      okText: "I'm sure",
-      cancelText: 'cancel',
+      okText: `${t("buttons.confirm")}`,
+      cancelText: `${t("buttons.cancel")}`,
       onOk: () => {dispatch(deleteAllLists()); Modal.destroyAll();},
       destroyOnClose: true
     });
@@ -55,8 +62,8 @@ let noLists = lists.reduce((ac, cur)=>{
           </div>
         </div>
       </div>
-      {lists.length < 1 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['Create List', '/lists']} clk={() => dispatch(addList())} /> : ''}
-      { noLists ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={['Create List', '/lists']} clk={() => dispatch(addList())} />
+      {lists.length < 1 ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={[`${t("buttons.create")} List`, '/lists']} clk={() => dispatch(addList())} /> : ''}
+      { noLists ? <EmptyTodoMessage message={'No lists'} link={['Superhero Lists', '/concepts/superhero-lists']} button={[`${t("buttons.create")} List`, '/lists']} clk={() => dispatch(addList())} />
     : renderDeleteAllModal }
     </>
   );
