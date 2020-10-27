@@ -10,6 +10,7 @@ import Team from './components/statics/Team'
 import Signup from './components/user/Signup.js'
 import E403 from './components/core/E403'
 import E404 from './components/core/E404'
+import E500 from './components/core/E500'
 import Contacts from './components/statics/Contacts'
 import './App.css'
 
@@ -55,6 +56,7 @@ const App = () => {
         }
             <Route path="/contact" component={Contacts} />
             <Route path="/team" component={Team} />
+            <Route path="/ooops" component={E500} />
             <Route component={E404} />
           </Content> 
         </BrowserRouter>
