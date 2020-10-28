@@ -7,8 +7,9 @@ import CustomSider from './components/core/CustomSider'
 import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
+import Concept from './components/statics/Concept'
 import Signup from './components/user/Signup.js'
-import Edit from './components/user/edit.js'
+import Edit from './components/user/Edit.js'
 import E403 from './components/core/E403'
 import E404 from './components/core/E404'
 import E500 from './components/core/E500'
@@ -116,6 +117,7 @@ const App = () => {
               <Route exact path="/edit-profile" component={Edit} />
               <Route exact path="/contact" component={Contacts} />
               <Route exact path="/team" component={Team} />
+              <Route exact path="/concepts" component={Concept} />
               <Route exact path="/player" component={Player} />
               <Route exact path="/ooops" component={E500} />
               <Route exact path="/timer" component={Timer} />
