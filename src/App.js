@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { loadSavedState } from './actions';
 import {  Layout, Breadcrumb, Typography, Tag } from 'antd'
@@ -105,6 +105,7 @@ const App = () => {
               <Route exact path="/team" component={Team} />
               <Route exact path="/player" component={Player} />
               <Route exact path="/ooops" component={E500} />
+              <Redirect from="/logout" to="/"/>
               <Route path="*" component={E404} />
             </Switch>
             </>) : 
