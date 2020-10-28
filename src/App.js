@@ -8,6 +8,7 @@ import MainLayout from './components/MainLayout'
 import Achievement from './components/user/Achievement'
 import Team from './components/statics/Team'
 import Signup from './components/user/Signup.js'
+import Edit from './components/user/edit.js'
 import E403 from './components/core/E403'
 import E404 from './components/core/E404'
 import E500 from './components/core/E500'
@@ -112,6 +113,7 @@ const App = () => {
             <Switch>
               <Route exact path="/" exact component={MainLayout} />
               <Route exact path="/achievement" component={Achievement} />
+              <Route exact path="/edit-profile" component={Edit} />
               <Route exact path="/contact" component={Contacts} />
               <Route exact path="/team" component={Team} />
               <Route exact path="/player" component={Player} />
