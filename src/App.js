@@ -12,6 +12,7 @@ import E403 from './components/core/E403'
 import E404 from './components/core/E404'
 import E500 from './components/core/E500'
 import Contacts from './components/statics/Contacts'
+import Timer from './components/statics/Timer'
 import Player from './components/Player'
 import { useTranslation } from "react-i18next";
 import './App.css'
@@ -79,6 +80,7 @@ const App = () => {
               <Route exact path="/team" component={Team} />
               <Route exact path="/player" component={Player} />
               <Route exact path="/ooops" component={E500} />
+              <Route exact path="/timer" component={Timer} />
               <Route path="*" component={E404} />
             </Switch>
         }
