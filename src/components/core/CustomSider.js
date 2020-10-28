@@ -18,11 +18,6 @@ const SubMenu = Menu.SubMenu;
 const CustomSider = ({ changeLanguage }) => {
 
 const { t, i18n } = useTranslation();
-// {t("")} 
- /* <div><h1>{t("title")}</h1></div>
-          <div>{t("description.part1")}</div>
-          {t("")}
- */
 
 const [collapsed, setCollapsed] = useState(0);
 return (
@@ -48,6 +43,7 @@ return (
                         {t("sidebar.profile.language")}
                     </L>
                 </Menu.Item>
+                { localStorage.getItem("user") &&
                 <Menu.Item key="5">
                     <L href="/logout" className="nav-text"
                     onClick={() => {
@@ -56,6 +52,7 @@ return (
                     }}
                     >{t("sidebar.profile.logout")}</L>
                 </Menu.Item>
+                }
             </SubMenu>
             <SubMenu key="sub2" icon={<InfoCircleOutlined />} title={t("sidebar.about.title")}>
                 <Menu.Item key="6">
