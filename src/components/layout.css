@@ -32,6 +32,26 @@
     right: 1em;
 }
 
+.contact-wrapper {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    padding: 1em 0;
+    grid-gap: 1em 0;
+}
+
+.contact-row {
+    display: flex;
+    height: 100%;
+    align-content: center;
+    align-items: center;
+    padding: 0 2em;
+}
+
+.imgTeam {
+    height: 182px;
+}
+
 @keyframes opacityNdown {
     from {
         opacity: 100%;
