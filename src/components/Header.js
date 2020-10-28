@@ -7,8 +7,19 @@ import {  ExclamationCircleOutlined  } from '@ant-design/icons'
 import './layout.css'
 import Config from './../Config'
 import { useTranslation } from "react-i18next";
-//const { t, i18n } = useTranslation();
-// {t("")}
+import {  message } from 'antd'
+
+const success = (word) => {
+  message.success(`Woohoo! New ${word}!`);
+};
+
+const error = () => {
+  message.error('This is an error message');
+};
+
+const warning = () => {
+  message.warning('Welcome, Superhero in mask! Please, name yourself! ');
+};
 
 const Header = () => {
 
@@ -34,7 +45,7 @@ let noLists = lists.reduce((ac, cur)=>{
   );
 
   const CreateButton = () => { 
-    return <Button type="primary" onClick={() => {dispatch(addList())
+    return <Button type="primary" onClick={() => {dispatch(addList()); success("list");
      /* fetch(`${Config('ApiUrl')}lists`, {
         method: "POST",
         mode: "cors",

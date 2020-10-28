@@ -6,8 +6,11 @@ import {
   EditOutlined
  } from '@ant-design/icons';
  import { useTranslation } from "react-i18next";
-//const { t, i18n } = useTranslation();
-// {t("")} 
+ import {  message } from 'antd'
+
+ const success = (word) => {
+   message.success(`Woohoo! New ${word}!`);
+ };
 
 const AddTodo = props => {
 
@@ -20,6 +23,7 @@ const AddTodo = props => {
   const onAddTodo = (listId, e) => {
     e.preventDefault();
     dispatch(add(newTodo, listId));
+    success("todo")
     setNewTodo('');
   };
 

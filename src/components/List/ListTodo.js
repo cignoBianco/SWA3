@@ -16,7 +16,11 @@ import {
   StarFilled, StarOutlined,
   CheckCircleOutlined, PlusCircleOutlined
  } from '@ant-design/icons';
- 
+ import {  message } from 'antd'
+
+const success = (word) => {
+  message.success(`Woohoo! ${word}!`);
+};
 
 const ListTodo = props => {
   const dispatch = useDispatch();
@@ -117,7 +121,7 @@ const ListTodo = props => {
       {
         todo.completed 
         ? <CheckCircleOutlined onClick={() => onToggleCompleted(listId, todo.id)} />
-        : <PlusCircleOutlined onClick={() => onToggleCompleted(listId, todo.id)} />
+        : <PlusCircleOutlined onClick={() => {onToggleCompleted(listId, todo.id); success("You've completed a task!")} } />
       }
       <span
         style={todo.completed ? { textDecoration: 'line-through' } : null}
