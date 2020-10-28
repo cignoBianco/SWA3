@@ -16,7 +16,31 @@ import Timer from './components/statics/Timer'
 import Player from './components/Player'
 import { useTranslation } from "react-i18next";
 import './App.css'
+import {  message } from 'antd'
 
+const success = () => {
+  message.success('Hello, Supermen!');
+};
+
+const error = () => {
+  message.error('This is an error message');
+};
+
+const warning = () => {
+  message.warning('Welcome, Superhero in mask! Please, name yourself! ');
+};
+
+if (!localStorage.getItem('visitedAt'))
+localStorage.setItem('visitedAt', Date.now());
+console.log(localStorage.getItem('visitedAt'))
+
+console.log(localStorage.getItem('visitedAt'), Date.now(),
+Math.floor((Date.now()-localStorage.getItem('visitedAt')) /1000/ 60))
+
+window.onbeforeunload = () => {
+if (Math.floor((Date.now()-localStorage.getItem('visitedAt')) /1000/ 60) >= 8)
+localStorage.removeItem('visited');
+}
 
 const { Header: H, Footer, Content } = Layout;
 
@@ -24,6 +48,8 @@ const App = () => {
 
   const { t, i18n } = useTranslation();
   const [lang, toggleLang] = useState("en")
+  const [visited, setVisited] = useState(localStorage.getItem('visited'))
+  
   const changeLanguage = (language) => {
     console.log(lang, language)
 
@@ -52,6 +78,15 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('storedState', JSON.stringify(lists));
   });
+
+  if (!visited) {(user) ? success() : warning();
+    localStorage.setItem('visited', 1)
+    localStorage.setItem('visitedAt', Date.now())
+  }
+
+  localStorage.setItem('visited', 1);
+ 
+ 
 
   return (
     <div className="App">

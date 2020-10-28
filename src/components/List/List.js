@@ -79,6 +79,7 @@ const List = props => {
 
   totalCompleted = todos.filter(todo => todo.completed).length;
   progressPerc = (totalCompleted / todos.length) * 100;
+  if (progressPerc === 100) alert("success!")
 
   return (
     <div data-id={id} id={id}>
